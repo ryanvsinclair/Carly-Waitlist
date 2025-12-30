@@ -220,6 +220,7 @@ export default function MainPage() {
       }`}
     >
       <LoggedOutNav />
+
       {/* Hero Section */}
       <section className="pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center space-y-8">
@@ -227,12 +228,13 @@ export default function MainPage() {
             The first marketplace built for both sides of the deal.
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto text-accent">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             Carly breaks down the walls between buyers and dealers — making car
             buying transparent, intelligent, and human again.
           </p>
         </div>
       </section>
+
       {/* Value Proposition - Three Pillars */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
@@ -293,6 +295,7 @@ export default function MainPage() {
           </div>
         </div>
       </section>
+
       {/* Why Carly Exists Section */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
@@ -325,8 +328,10 @@ export default function MainPage() {
           </div>
         </div>
       </section>
+
       {/* Gradient Divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent max-w-4xl mx-auto" />
+
       {/* Why Carly Section - Guided Spotlight Walkthrough */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
@@ -368,6 +373,7 @@ export default function MainPage() {
                   {isActive && (
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-3xl rounded-3xl" />
                   )}
+                  
                   <div
                     className={`relative bg-card backdrop-blur-sm rounded-3xl p-10 md:p-12 transition-all duration-500 border-2 ${
                       isActive
@@ -375,6 +381,7 @@ export default function MainPage() {
                         : "shadow-sm border-border/50"
                     }`}
                   >
+
                     <div className="space-y-6">
                       {/* Icon and Title */}
                       <div className="flex items-center gap-4">
@@ -428,8 +435,10 @@ export default function MainPage() {
           </div>
         </div>
       </section>
+
       {/* Gradient Divider */}
       <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent max-w-4xl mx-auto" />
+
       {/* Status / Roadmap Section */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center space-y-8">
@@ -467,6 +476,7 @@ export default function MainPage() {
           </div>
         </div>
       </section>
+
       <CarlyFooter />
     </div>
   );
