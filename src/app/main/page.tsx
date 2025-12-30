@@ -24,6 +24,7 @@ import {
   Wrench,
   Award,
   TrendingUp,
+  Clock
 } from "lucide-react";
 
 export default function MainPage() {
@@ -103,7 +104,7 @@ export default function MainPage() {
       description:
         "Pick a time. Show up. Schedule a test drive or appointment directly from the listing. No calls. No hold music. Choose a date. Choose a time. Done.",
       outcome: "Outcome: Real momentum doesn't wait.",
-      icon: Calendar,
+      icon: Clock,
     },
     {
       title: "Instant Service Booking",
@@ -131,7 +132,7 @@ export default function MainPage() {
       description:
         "Know what's real — and what's been recycled. See when a listing first appeared - each VIN is date and time tagged. Understand when it was first listed and all that has happened since.",
       outcome: "Outcome: Clear history at a glance.",
-      icon: TrendingUp,
+      icon: Calendar,
     },
   ];
 
@@ -251,8 +252,8 @@ export default function MainPage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm leading-relaxed">
-                  Buyers and dealers operate in the same ecosystem — no shadows,
-                  no lead reselling, no games.
+                  Buyers and dealers operate in the same ecosystem. No more
+                  shadows, tricks or games.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -269,7 +270,7 @@ export default function MainPage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-sm leading-relaxed">
-                  Transparent pricing, verified listings, real data — no
+                  Transparent pricing. Verified listings. Real data — No
                   bait-and-switch.
                 </CardDescription>
               </CardContent>
@@ -373,7 +374,7 @@ export default function MainPage() {
                   {isActive && (
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-3xl rounded-3xl" />
                   )}
-                  
+
                   <div
                     className={`relative bg-card backdrop-blur-sm rounded-3xl p-10 md:p-12 transition-all duration-500 border-2 ${
                       isActive
@@ -381,7 +382,6 @@ export default function MainPage() {
                         : "shadow-sm border-border/50"
                     }`}
                   >
-
                     <div className="space-y-6">
                       {/* Icon and Title */}
                       <div className="flex items-center gap-4">

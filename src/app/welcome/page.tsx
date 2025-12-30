@@ -50,7 +50,7 @@ export default function WelcomePage() {
   };
 
   return (
-    <div 
+    <div
       className={`carly-gradient-bg min-h-screen flex items-center justify-center px-4 transition-all ease-out ${
         step === 4 ? "cursor-pointer" : "cursor-default"
       } ${step === 5 ? "opacity-0 scale-[0.96] duration-300" : "opacity-100 scale-100 duration-0"}`}
@@ -59,17 +59,15 @@ export default function WelcomePage() {
       <div className="max-w-3xl mx-auto text-center space-y-8 pointer-events-none">
         {/* Headline */}
         <h1
-          className={`text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent dark:drop-shadow-[0_0_12px_rgba(139,92,246,0.35)] transition-all duration-700 ${
-            step >= 1
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-4"
+          className={`text-6xl md:text-7xl lg:text-8xl font-light tracking-tight leading-[1.1] bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent dark:drop-shadow-[0_0_12px_rgba(139,92,246,0.35)] transition-all duration-700 ${
+            step >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           Welcome to Carly
         </h1>
 
         {/* Subheadline - Two-Part Reveal */}
-        <div className="text-lg md:text-xl text-muted-foreground leading-relaxed space-y-2">
+        <div className="text-xl md:text-2xl lg:text-3xl text-muted-foreground leading-relaxed space-y-2">
           <p
             className={`transition-all duration-700 ease-out ${
               step >= 2
@@ -77,7 +75,7 @@ export default function WelcomePage() {
                 : "opacity-0 translate-y-3"
             }`}
           >
-            Because you deserve better.
+            Car Shopping - Reimagined.
           </p>
           <p
             className={`transition-all duration-700 ease-out ${
@@ -86,20 +84,18 @@ export default function WelcomePage() {
                 : "opacity-0 translate-y-3"
             }`}
           >
-            We've got you now.
+            Because we all deserve a change.
           </p>
         </div>
       </div>
 
       {/* Click Anywhere Hint */}
-      <div 
+      <div
         className={`fixed bottom-8 left-0 right-0 text-center transition-all duration-700 pointer-events-none ${
-          step === 4
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-2"
+          step === 4 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >
-        <p className="text-sm text-muted-foreground/60 animate-pulse-glow">
+        <p className="text-base md:text-lg text-muted-foreground/60 animate-pulse-glow">
           Click anywhere to enter
         </p>
       </div>

@@ -5,169 +5,217 @@ import { createBrowserClient } from "@supabase/ssr";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-type WaitlistState = 'idle' | 'choose-role' | 'buyer-form' | 'dealer-form' | 'success';
+type LaunchUpdatesState = "idle" | "form" | "success";
+type Audience = "shopper" | "dealer";
 
 interface WaitlistFlowProps {
   isActivated?: boolean;
 }
 
 export function WaitlistFlow({ isActivated = false }: WaitlistFlowProps) {
-  const [state, setState] = useState<WaitlistState>('idle');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
+  const [state, setState] = useState<LaunchUpdatesState>("idle");
+  const [audience, setAudience] = useState<Audience>("shopper");
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
 
-  const handleJoinClick = () => {
-    setState('choose-role');
+  const handleGetUpdatesClick = () => {
+    setState("form");
   };
 
-  const handleRoleSelect = (role: 'buyer' | 'dealer') => {
-    setState(role === 'buyer' ? 'buyer-form' : 'dealer-form');
-    setError('');
-  };
-
-  const handleSubmit = async (role: 'buyer' | 'dealer') => {
+  const handleSubmit = async () => {
     if (!email.trim()) {
-      setError('Email is required');
+      setError("Email is required");
+      return;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    if (!name.trim()) {
+      setError(
+        audience === "dealer" ? "Dealership is required" : "Name is required",
+      );
       return;
     }
 
     setIsSubmitting(true);
-    setError('');
+    setError("");
 
     try {
       const { error: insertError } = await supabase
-        .from('waitlist_signups')
+        .from("waitlist_signups")
         .insert({
           email: email.trim().toLowerCase(),
-          role,
-          source: 'coming-soon'
+          name: name.trim(),
+          role: audience,
+          source: "coming-soon",
         });
 
       if (insertError) {
-        if (insertError.code === '23505') {
-          setError("You're already on the waitlist.");
+        if (insertError.code === "23505") {
+          setError("You're already signed up.");
         } else {
-          setError('Something went wrong. Please try again.');
+          setError("Something went wrong. Please try again.");
         }
         setIsSubmitting(false);
         return;
       }
 
-      setState('success');
-      setEmail('');
-      setName('');
+      setState("success");
+      setEmail("");
+      setName("");
     } catch (err) {
-      setError('Network error. Please try again.');
+      setError("Network error. Please try again.");
       setIsSubmitting(false);
     }
   };
 
   const handleBack = () => {
-    setState('choose-role');
-    setError('');
-    setEmail('');
-    setName('');
+    setState("idle");
+    setError("");
+    setEmail("");
+    setName("");
   };
 
-  if (state === 'success') {
+  if (state === "success") {
     return (
       <div className="pt-4 animate-fade-in">
         <div className="text-center space-y-2">
-          <p className="text-lg font-medium">You're on the list.</p>
+          <p className="text-lg font-medium">You're all set.</p>
           <p className="text-sm text-muted-foreground">
-            Carly is being built carefully. We'll be in touch.
+            We'll send you {audience === "shopper" ? "shopper" : "dealer"}
+            -focused launch updates.
           </p>
         </div>
       </div>
     );
   }
 
-  if (state === 'buyer-form' || state === 'dealer-form') {
-    const role = state === 'buyer-form' ? 'buyer' : 'dealer';
-    const roleLabel = role === 'buyer' ? 'Buyer' : 'Dealer';
-
+  if (state === "form") {
     return (
-      <div className="pt-4 animate-fade-slide-in">
-        <div className="max-w-sm mx-auto space-y-4">
-          <div className="text-center mb-4">
-            <p className="text-sm text-muted-foreground">Signing up as a {roleLabel}</p>
-          </div>
-          
-          <div className="space-y-3">
-            <Input
-              type="email"
-              placeholder="Email *"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isSubmitting}
-              className="h-11"
-            />
-            
-            <Input
-              type="text"
-              placeholder="Name (optional)"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={isSubmitting}
-              className="h-11"
-            />
-          </div>
+      <div className="pt-8 animate-fade-slide-in">
+        <div className="max-w-md mx-auto">
+          {/* Premium form container */}
+          <div className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 shadow-[0_8px_32px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.24)] border border-border/20">
+            {/* Shopper / Dealer Toggle */}
+            <div className="mb-8">
+              <div className="relative bg-background/40 rounded-xl p-1 inline-flex w-full max-w-xs mx-auto overflow-hidden">
+                {/* Animated gradient background layer */}
+                <div
+                  className="absolute inset-y-1 w-[calc(50%-2px)] bg-gradient-to-r from-blue-500 via-blue-600 to-purple-500 rounded-lg shadow-sm transition-all duration-300 ease-in-out"
+                  style={{
+                    left: audience === "shopper" ? "4px" : "calc(50% + 2px)",
+                  }}
+                />
 
-          {error && (
-            <p className="text-sm text-red-500 text-center">{error}</p>
-          )}
+                {/* Toggle buttons */}
+                <button
+                  type="button"
+                  onClick={() => setAudience("shopper")}
+                  className={`relative z-10 flex-1 py-2.5 px-4 text-sm font-medium transition-colors duration-200 ${
+                    audience === "shopper"
+                      ? "text-white"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Shopper
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAudience("dealer")}
+                  className={`relative z-10 flex-1 py-2.5 px-4 text-sm font-medium transition-colors duration-200 ${
+                    audience === "dealer"
+                      ? "text-white"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Dealer
+                </button>
+              </div>
+            </div>
 
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              onClick={handleBack}
-              disabled={isSubmitting}
-              className="flex-1"
-            >
-              Back
-            </Button>
-            <Button
-              onClick={() => handleSubmit(role)}
-              disabled={isSubmitting}
-              className="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:opacity-90"
-            >
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </Button>
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <label
+                  htmlFor="email-input"
+                  className="text-xs font-medium text-muted-foreground uppercase tracking-wider pl-0.5"
+                >
+                  <span
+                    className={`inline-block transition-opacity duration-300 ${audience === "dealer" ? "opacity-100" : "opacity-0 w-0 overflow-hidden"}`}
+                  >
+                    Dealer{" "}
+                  </span>
+                  {audience === "dealer" ? "" : " "} Email Address
+                </label>
+                <Input
+                  id="email-input"
+                  type="email"
+                  placeholder="your@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting}
+                  className="h-12 bg-background/60 border-border/40 rounded-xl focus:border-blue-500/60 focus:ring-4 focus:ring-blue-500/10 dark:focus:ring-blue-400/10 transition-all duration-200"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label
+                  htmlFor="name-input"
+                  className="text-xs font-medium text-muted-foreground uppercase tracking-wider pl-0.5"
+                >
+                  {audience === "dealer" ? (
+                    <span className="inline-block animate-fade-in">
+                      Dealership
+                    </span>
+                  ) : (
+                    <span className="inline-block animate-fade-in">Name</span>
+                  )}
+                </label>
+                <Input
+                  id="name-input"
+                  type="text"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  disabled={isSubmitting}
+                  className="h-12 bg-background/60 border-border/40 rounded-xl focus:border-purple-500/60 focus:ring-4 focus:ring-purple-500/10 dark:focus:ring-purple-400/10 transition-all duration-200"
+                />
+              </div>
+            </div>
+
+            {error && (
+              <p className="text-sm text-red-500 text-center mt-5">{error}</p>
+            )}
+
+            <div className="flex gap-3 mt-8">
+              <Button
+                variant="ghost"
+                onClick={handleBack}
+                disabled={isSubmitting}
+                className="h-11 px-5 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-transparent transition-all duration-200"
+              >
+                Back
+              </Button>
+              <Button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="flex-1 h-12 px-6 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white rounded-xl font-medium shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 dark:shadow-blue-500/30 dark:hover:shadow-blue-500/40 transition-all duration-200 active:scale-[0.99]"
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
+              </Button>
+            </div>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (state === 'choose-role') {
-    return (
-      <div className="pt-4 animate-fade-slide-in">
-        <div className="flex gap-3 justify-center">
-          <Button
-            size="lg"
-            onClick={() => handleRoleSelect('buyer')}
-            className={`h-12 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:opacity-90 transition-all duration-300 ${
-              isActivated ? 'animate-role-button-glow' : ''
-            }`}
-          >
-            I'm a Buyer
-          </Button>
-          <Button
-            size="lg"
-            onClick={() => handleRoleSelect('dealer')}
-            className={`h-12 px-6 bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:opacity-90 transition-all duration-300 ${
-              isActivated ? 'animate-role-button-glow' : ''
-            }`}
-          >
-            I'm a Dealer
-          </Button>
         </div>
       </div>
     );
@@ -177,15 +225,15 @@ export function WaitlistFlow({ isActivated = false }: WaitlistFlowProps) {
     <div className="pt-4">
       <Button
         size="lg"
-        onClick={handleJoinClick}
+        onClick={handleGetUpdatesClick}
         tabIndex={isActivated ? 0 : -1}
         className={`h-12 px-8 text-base bg-gradient-to-r from-blue-500 to-purple-500 text-white transition-all duration-300 hover:scale-[0.98] ${
-          isActivated 
-            ? 'opacity-100 hover:opacity-90' 
-            : 'opacity-60 hover:opacity-70'
+          isActivated
+            ? "opacity-100 hover:opacity-90"
+            : "opacity-60 hover:opacity-70"
         }`}
       >
-        Join the Waitlist
+        Get Launch Updates
       </Button>
     </div>
   );
