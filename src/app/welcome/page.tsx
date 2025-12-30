@@ -91,7 +91,7 @@ export default function WelcomePage() {
 
       {/* Click Anywhere Hint */}
       <div
-        className={`fixed bottom-8 left-0 right-0 text-center transition-all duration-700 pointer-events-none ${
+        className={`fixed bottom-32 sm:bottom-24 left-0 right-0 text-center transition-all duration-700 pointer-events-none ${
           step === 4 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
         }`}
       >

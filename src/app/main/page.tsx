@@ -24,7 +24,7 @@ import {
   Wrench,
   Award,
   TrendingUp,
-  Clock
+  Clock,
 } from "lucide-react";
 
 export default function MainPage() {
@@ -123,7 +123,7 @@ export default function MainPage() {
     {
       title: "Listing Metrics",
       description:
-        "Know what's real — and what's been recycled. Live view and save count. Track what's trending and what's stalling.",
+        "See straight through a listing. Live view and save count. Track what's trending and what's stalling.",
       outcome: "Outcome: Better timing. Smarter decisions.",
       icon: TrendingUp,
     },
@@ -241,43 +241,51 @@ export default function MainPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Dual-Sided */}
-            <Card className="card-lift rounded-xl border bg-card shadow">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center mb-4">
-                  <Users className="w-6 h-6 text-blue-500" />
-                </div>
-                <CardTitle className="text-xl md:text-2xl font-medium tracking-tight">
-                  Dual-Sided by Design
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm leading-relaxed">
-                  Buyers and dealers operate in the same ecosystem. No more
-                  shadows, tricks or games.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <div className="relative">
+              <div className="absolute inset-0 bg-white/30 dark:bg-white/10 blur-3xl rounded-3xl" />
+              <Card className="card-lift rounded-xl border bg-card shadow relative">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center mb-4">
+                    <Users className="w-6 h-6 text-blue-500" />
+                  </div>
+                  <CardTitle className="text-xl md:text-2xl font-medium tracking-tight">
+                    Dual-Sided by Design
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-sm leading-relaxed">
+                    Buyers and dealers operate in the same ecosystem. No more
+                    shadows, tricks or games.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Built on Trust */}
-            <Card className="card-lift rounded-xl border bg-card shadow">
-              <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center mb-4">
-                  <Shield className="w-6 h-6 text-purple-500" />
-                </div>
-                <CardTitle className="text-xl md:text-2xl font-medium tracking-tight">
-                  Built on Trust, Not Tricks
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-sm leading-relaxed">
-                  Transparent pricing. Verified listings. Real data — No
-                  bait-and-switch.
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <div className="relative">
+              <div className="absolute inset-0 bg-white/30 dark:bg-white/10 blur-3xl rounded-3xl" />
+              <Card className="card-lift rounded-xl border bg-card shadow relative">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center mb-4">
+                    <Shield className="w-6 h-6 text-purple-500" />
+                  </div>
+                  <CardTitle className="text-xl md:text-2xl font-medium tracking-tight">
+                    Built on Trust, Not Tricks
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription className="text-sm leading-relaxed">
+                    Transparent pricing. Verified listings. Real data — No
+                    bait-and-switch.
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* Intelligent */}
-            <Card className="card-lift rounded-xl border bg-card shadow">
+            <div className="relative">
+              <div className="absolute inset-0 bg-white/30 dark:bg-white/10 blur-3xl rounded-3xl" />
+              <Card className="card-lift rounded-xl border bg-card shadow relative">
               <CardHeader>
                 <div className="w-12 h-12 rounded-xl bg-indigo-500/10 dark:bg-indigo-500/20 flex items-center justify-center mb-4">
                   <Brain className="w-6 h-6 text-indigo-500" />
@@ -293,45 +301,12 @@ export default function MainPage() {
                 </CardDescription>
               </CardContent>
             </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Why Carly Exists Section */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-8 text-center">
-            Why Carly Exists
-          </h2>
 
-          <div className="space-y-6 text-base leading-relaxed text-muted-foreground">
-            <p>
-              Current car marketplaces are broken. Buyers don't trust them
-              because they're built to generate leads, not facilitate honest
-              transactions. Dealers are buried in noise — low-quality inquiries,
-              tire-kickers, and platforms that treat them as profit centers
-              rather than partners.
-            </p>
-
-            <p>
-              The result? A system where everyone loses. Buyers feel
-              manipulated. Dealers waste time. And the industry keeps spinning
-              the same tired playbook.
-            </p>
-
-            <p>
-              Carly was built differently. It's not another classifieds site.
-              It's not another lead-farm. It's a dual-sided marketplace designed
-              to break down the walls that keep buyers and dealers apart —
-              creating a transparent, intelligent space where both sides can
-              operate with confidence.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Gradient Divider */}
-      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent max-w-4xl mx-auto" />
 
       {/* Why Carly Section - Guided Spotlight Walkthrough */}
       <section className="py-16 sm:py-24 px-4 sm:px-6">
@@ -373,8 +348,8 @@ export default function MainPage() {
                   }}
                 >
                   {/* Radial glow behind card */}
-                  {isActive && (
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-blue-500/20 blur-3xl rounded-3xl" />
+                  {(isActive || index < 3) && (
+                    <div className="absolute inset-0 bg-white/30 dark:bg-white/10 blur-3xl rounded-3xl" />
                   )}
 
                   <div
@@ -434,6 +409,42 @@ export default function MainPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Gradient Divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent max-w-4xl mx-auto" />
+
+      {/* Why Carly Exists Section */}
+      <section className="py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-light tracking-tight mb-8 text-center">
+            Why Carly Exists
+          </h2>
+
+          <div className="space-y-6 text-base leading-relaxed text-muted-foreground">
+            <p>
+              Current car marketplaces are broken. Buyers don't trust them
+              because they're built to generate leads, not facilitate honest
+              transactions. Dealers are buried in noise — low-quality inquiries,
+              tire-kickers, and platforms that treat them as profit centers
+              rather than partners.
+            </p>
+
+            <p>
+              The result? A system where everyone loses. Buyers feel
+              manipulated. Dealers waste time. And the industry keeps spinning
+              the same tired playbook.
+            </p>
+
+            <p>
+              Carly was built differently. It's not another classifieds site.
+              It's not another lead-farm. It's a dual-sided marketplace designed
+              to break down the walls that keep buyers and dealers apart —
+              creating a transparent, intelligent space where both sides can
+              operate with confidence.
+            </p>
           </div>
         </div>
       </section>
