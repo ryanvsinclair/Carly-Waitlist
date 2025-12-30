@@ -75,7 +75,7 @@ export default function WelcomePage() {
                 : "opacity-0 translate-y-3"
             }`}
           >
-            Car Shopping - Reimagined.
+            Car shopping without all the noise.
           </p>
           <p
             className={`transition-all duration-700 ease-out ${
@@ -84,7 +84,7 @@ export default function WelcomePage() {
                 : "opacity-0 translate-y-3"
             }`}
           >
-            Because we all deserve a change.
+            Because we all deserve to make the best decision.
           </p>
         </div>
       </div>
