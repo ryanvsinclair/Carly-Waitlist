@@ -360,7 +360,9 @@ export default function MainPage() {
                 <div
                   key={index}
                   id={index === 0 ? "personalized-browse-card" : undefined}
-                  ref={(el) => (cardRefs.current[index] = el)}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   className={`relative transition-all duration-700 ease-out ${
                     cardsVisible
                       ? "opacity-100 translate-y-0"
