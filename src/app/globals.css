@@ -99,6 +99,7 @@
     background: linear-gradient(to bottom right, hsl(var(--gradient-from)), hsl(var(--gradient-to)));
     background-attachment: fixed;
     min-height: 100vh;
+    will-change: auto;
   }
   
   /* Button lift effect */

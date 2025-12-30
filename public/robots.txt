@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bcda714f-b0bc-4f37-b3d3-2d7e98b4777a.canvases.tempo.build/sitemap.xml

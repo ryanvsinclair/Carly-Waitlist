@@ -226,7 +226,7 @@ export default function MainPage() {
       <section className="pt-32 pb-16 sm:pt-40 sm:pb-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent dark:drop-shadow-[0_0_12px_rgba(139,92,246,0.35)]">
-            The first marketplace built for both sides of the deal.
+            The first marketplace built for both sides of the deal
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
