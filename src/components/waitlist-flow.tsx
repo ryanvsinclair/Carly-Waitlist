@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type LaunchUpdatesState = "idle" | "form" | "success";
-type Audience = "shopper" | "dealer";
+type Audience = "buyer" | "dealer";
 
 interface WaitlistFlowProps {
   isActivated?: boolean;
@@ -14,7 +14,7 @@ interface WaitlistFlowProps {
 
 export function WaitlistFlow({ isActivated = false }: WaitlistFlowProps) {
   const [state, setState] = useState<LaunchUpdatesState>("idle");
-  const [audience, setAudience] = useState<Audience>("shopper");
+  const [audience, setAudience] = useState<Audience>("buyer");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState("");
@@ -94,7 +94,7 @@ export function WaitlistFlow({ isActivated = false }: WaitlistFlowProps) {
         <div className="text-center space-y-2">
           <p className="text-lg font-medium">You're all set.</p>
           <p className="text-sm text-muted-foreground">
-            We'll send you {audience === "shopper" ? "shopper" : "dealer"}
+            We'll send you {audience === "buyer" ? "buyer" : "dealer"}
             -focused launch updates.
           </p>
         </div>
@@ -115,21 +115,21 @@ export function WaitlistFlow({ isActivated = false }: WaitlistFlowProps) {
                 <div
                   className="absolute inset-y-1 w-[calc(50%-2px)] bg-gradient-to-r from-blue-500 via-blue-600 to-purple-500 rounded-lg shadow-sm transition-all duration-300 ease-in-out"
                   style={{
-                    left: audience === "shopper" ? "4px" : "calc(50% + 2px)",
+                    left: audience === "buyer" ? "4px" : "calc(50% + 2px)",
                   }}
                 />
 
                 {/* Toggle buttons */}
                 <button
                   type="button"
-                  onClick={() => setAudience("shopper")}
+                  onClick={() => setAudience("buyer")}
                   className={`relative z-10 flex-1 py-2.5 px-4 text-sm font-medium transition-colors duration-200 ${
-                    audience === "shopper"
+                    audience === "buyer"
                       ? "text-white"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  Shopper
+                  Buyer
                 </button>
                 <button
                   type="button"
